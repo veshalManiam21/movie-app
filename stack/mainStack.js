@@ -5,6 +5,7 @@ import tw from "tailwind-react-native-classnames";
 import { StyleSheet } from "react-native";
 import Home from "../pages/home";
 import MovieInfo from "../pages/movieInfo";
+import { roundToNearestPixel } from "react-native/Libraries/Utilities/PixelRatio";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +16,7 @@ const MainStack = () => {
     headerTitleStyle: styles.headerTitle,
     headerTintColor: "#f5c518",
     tintColor: "white",
+    headerTitleAlign: "center",
   };
 
   return (
@@ -28,7 +30,7 @@ const MainStack = () => {
         <Stack.Screen
           name="MovieInfo"
           component={MovieInfo}
-          options={{ ...options, title: "" }}
+          options={({ route }) => ({ ...options, title: route.params.name })}
         />
       </Stack.Navigator>
     </NavigationContainer>
@@ -45,6 +47,8 @@ const styles = new StyleSheet.create({
   headerTitle: {
     color: "#f5c518",
     fontSize: 24,
+    justifyContent: "center",
+    alignSelf: "center",
   },
 });
 

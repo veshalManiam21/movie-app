@@ -4,7 +4,7 @@ import { addToFavourites } from "../events/events";
 
 import tw from "tailwind-react-native-classnames";
 
-function MovieCard({ movieData, navigation }) {
+function MovieCard({ movieData, navigation, isDetail }) {
   const dispatch = useDispatch();
   const favouritesId = useSelector((state) => state.reducer.favourites.itemsId);
   return (
@@ -12,6 +12,7 @@ function MovieCard({ movieData, navigation }) {
       onPress={() => {
         navigation.navigate("MovieInfo", {
           id: movieData.id,
+          name: movieData.title,
         });
       }}
     >
@@ -35,28 +36,29 @@ function MovieCard({ movieData, navigation }) {
             }}
           />
         </View>
-
-        <View style={[tw`p-2 relative rounded-b-lg`, styles.bottomPart]}>
-          <View style={styles.ratingContainer}>
-            <Image
-              style={[tw`w-3 h-3`]}
-              source={require("../assets/star.png")}
-            />
-            <Text style={[tw`text-gray-300 font-bold`, styles.ratingFlex]}>
-              {movieData.imDbRating !== "" ? movieData.imDbRating : 0}
+        {!isDetail ? (
+          <View style={[tw`p-2 relative rounded-b-lg`, styles.bottomPart]}>
+            <View style={styles.ratingContainer}>
+              <Image
+                style={[tw`w-3 h-3`]}
+                source={require("../assets/star.png")}
+              />
+              <Text style={[tw`text-gray-300 font-bold`, styles.ratingFlex]}>
+                {movieData.imDbRating !== "" ? movieData.imDbRating : 0}
+              </Text>
+            </View>
+            <Text
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              style={[tw`text-white font-bold`, styles.movieTitle]}
+            >
+              {movieData.title}
+            </Text>
+            <Text style={[tw`text-white font-bold`, styles.movieTitle]}>
+              Rank: {movieData.rank}
             </Text>
           </View>
-          <Text
-            numberOfLines={1}
-            ellipsizeMode="tail"
-            style={[tw`text-white font-bold`, styles.movieTitle]}
-          >
-            {movieData.title}
-          </Text>
-          <Text style={[tw`text-white font-bold`, styles.movieTitle]}>
-            Rank: {movieData.rank}
-          </Text>
-        </View>
+        ) : null}
       </View>
     </TouchableOpacity>
   );
