@@ -15,7 +15,7 @@ function CategoryList({
       <Text style={styles.headerText}>{headerTitle}</Text>
       <View style={[styles.container, tw`p-4`]}>
         <Text style={styles.titleText}> {title}</Text>
-        {dataList ? (
+        {dataList && dataList.items.length ? (
           <ScrollView horizontal={true} nestedScrollEnabled={true}>
             {dataList.items.map((movie, idx) => {
               const movieData = {

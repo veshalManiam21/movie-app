@@ -5,7 +5,6 @@ import tw from "tailwind-react-native-classnames";
 import { StyleSheet } from "react-native";
 import Home from "../pages/home";
 import MovieInfo from "../pages/movieInfo";
-import { roundToNearestPixel } from "react-native/Libraries/Utilities/PixelRatio";
 
 const Stack = createNativeStackNavigator();
 
